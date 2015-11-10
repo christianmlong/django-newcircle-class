@@ -9,8 +9,6 @@ from rest_framework import serializers
 class QuestionsSerializer(serializers.HyperlinkedModelSerializer):
 
     answers = serializers.StringRelatedField(
-    # answers = serializers.PrimaryKeyRelatedField(
-        # read_only=True,
         many=True,
     )
 
