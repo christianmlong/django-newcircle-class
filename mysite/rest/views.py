@@ -9,8 +9,24 @@ from serializers import QuestionsSerializer
 from serializers import AnswersSerializer
 # from serializers import UsersSerializer
 
+import time
+from hendrix.experience import crosstown_traffic
 
 def hello_world(request):
+    return render(
+        request,
+        "hello_questions.html",
+        {"message" : Question.objects.all()},
+    )
+
+def hello_async(request):
+
+    @crosstown_traffic()
+    def long_time():
+        for i in range(20):
+            time.sleep(.2)
+            print "Counter %s" % i
+
     return render(
         request,
         "hello_questions.html",

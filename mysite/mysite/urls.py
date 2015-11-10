@@ -29,5 +29,6 @@ router.register(r'answer', AnswerViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'rest.views.hello_world'),
+    url(r'^async/', 'rest.views.hello_async'),
     url(r'^api/', include(router.urls)),
 ]
