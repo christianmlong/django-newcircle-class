@@ -19,6 +19,8 @@ class QuestionsSerializer(serializers.HyperlinkedModelSerializer):
 
 class AnswersSerializer(serializers.HyperlinkedModelSerializer):
 
+    answerer = serializers.StringRelatedField()
+
     class Meta:
         model = Answer
 
