@@ -7,16 +7,10 @@ from rest.models import User
 from rest_framework import viewsets
 from serializers import QuestionsSerializer
 from serializers import AnswersSerializer
-from serializers import UsersSerializer
+# from serializers import UsersSerializer
 
 
 def hello_world(request):
-    # temp = []
-    # for index, question in enumerate(Question.objects.all()):
-    #     temp.append("%s %s" % (index, question))
-
-    # rendered_text = '<br>'.join(temp)
-
     return render(
         request,
         "hello_questions.html",
@@ -32,7 +26,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswersSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UsersSerializer
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UsersSerializer
 
