@@ -17,9 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
 from rest.views import QuestionViewSet
+from rest.views import AnswerViewSet
 
 router = routers.DefaultRouter()
 router.register(r'questions', QuestionViewSet)
+router.register(r'answer', AnswerViewSet)
 
 
 urlpatterns = [
