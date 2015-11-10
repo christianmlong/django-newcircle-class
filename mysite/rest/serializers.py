@@ -21,10 +21,16 @@ class AnswersSerializer(serializers.HyperlinkedModelSerializer):
     # answerer = serializers.PrimaryKeyRelatedField(
     #     read_only=True,
     # )
-    answerer = serializers.StringRelatedField()
+    answerer = serializers.StringRelatedField(
+        read_only=True,
+    )
+    question = serializers.StringRelatedField(
+        read_only=True,
+    )
 
     class Meta:
         model = Answer
+        fields = ('text', 'answerer', 'question')
 
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
 
