@@ -11,3 +11,13 @@ class Question(models.Model):
     def __unicode__(self):
         return self.text
 
+class Answer(models.Model):
+    """
+    Answer
+    """
+    text = models.CharField(max_length=255)
+    question = models.ForeignKey(Question, related_name='answers')
+
+    def __unicode__(self):
+        return self.text
+
