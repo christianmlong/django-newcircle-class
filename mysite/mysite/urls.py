@@ -18,10 +18,12 @@ from django.contrib import admin
 from rest_framework import routers
 from rest.views import QuestionViewSet
 from rest.views import AnswerViewSet
+from rest.views import UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'questions', QuestionViewSet)
 router.register(r'answer', AnswerViewSet)
+# router.register(r'user', UserViewSet)
 
 
 urlpatterns = [

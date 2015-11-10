@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest.models import Question
 from rest.models import Answer
+from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
@@ -17,8 +18,21 @@ class QuestionsSerializer(serializers.HyperlinkedModelSerializer):
 
 class AnswersSerializer(serializers.HyperlinkedModelSerializer):
 
+    # answerer = serializers.PrimaryKeyRelatedField(
+    #     read_only=True,
+    # )
     answerer = serializers.StringRelatedField()
 
     class Meta:
         model = Answer
+
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+
+    answers_authored = serializers.StringRelatedField(
+        many=True,
+    )
+
+    class Meta:
+        model = User
+        fields = ('id', 'email')
 

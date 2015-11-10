@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest.models import Question
 from rest.models import Answer
+from rest.models import User
 
 from rest_framework import viewsets
 from serializers import QuestionsSerializer
 from serializers import AnswersSerializer
+from serializers import UsersSerializer
 
 
 def hello_world(request):
@@ -29,4 +31,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswersSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UsersSerializer
 
