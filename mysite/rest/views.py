@@ -5,12 +5,14 @@ from rest.models import Answer
 from rest.models import User
 
 from rest_framework import viewsets
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
 from serializers import QuestionsSerializer
 from serializers import AnswersSerializer
 # from serializers import UsersSerializer
+
+from django.db.models import Count
 
 import time
 from hendrix.experience import crosstown_traffic
@@ -48,6 +50,13 @@ class QuestionViewSet(viewsets.ModelViewSet):
         has_match = q.has_answer_matching(pattern)
         # return Response(pattern)
         return Response(has_match)
+
+    @list_route()
+    def with_multiple_anwers(self, request):
+        questions = Question.objects.annotate(inumber_of_answers=Count('answers'))
+        questions.filter(answers__count__gt=1)
+        serializer = self.get_serializer(questions, many=True)
+        return Response(serializer.data)
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
