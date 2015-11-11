@@ -5,6 +5,9 @@ from rest.models import Answer
 from rest.models import User
 
 from rest_framework import viewsets
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
+
 from serializers import QuestionsSerializer
 from serializers import AnswersSerializer
 # from serializers import UsersSerializer
@@ -37,6 +40,14 @@ def hello_async(request):
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionsSerializer
+
+    @detail_route()
+    def has_matching_answer(self, request, pk=None):
+        q = self.get_object()
+        pattern = request.GET['pattern']
+        has_match = q.has_answer_matching(pattern)
+        # return Response(pattern)
+        return Response(has_match)
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()

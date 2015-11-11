@@ -12,6 +12,10 @@ class Question(models.Model):
     def __unicode__(self):
         return self.text
 
+    def has_answer_matching(self, pattern):
+        return self.answers.filter(text__icontains=pattern).exists()
+
+
 class Answer(models.Model):
     """
     Answer
